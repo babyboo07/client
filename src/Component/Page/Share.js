@@ -1,18 +1,17 @@
 import { IconButton, Input } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import React, { useEffect, useState } from "react";
-import Header from "../Layout/Header";
-import { searchVideo } from "../../apis/youtube";
-import { ThemeConsumer } from "styled-components";
+import React, { useState } from "react";
 
-const Search = () => {
+const Search = (props) => {
+  const {handleSearch} = props;
   const [searchQuery, setSearchQuery] = useState("");
+
 
   const onSubmit = (e) => {
     e.preventDefault();
-
-    searchVideo(searchQuery).then((res) => console.log(res));
+    handleSearch(searchQuery);
   };
+
 
   return (
     <div>

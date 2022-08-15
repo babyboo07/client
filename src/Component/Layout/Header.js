@@ -4,12 +4,13 @@ import Toolbar from "@mui/material/Toolbar";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { IconButton, Link, Menu, MenuItem } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
-import BtnLogoutGoogle from "../Shared/BtnLogoutGoogle";
+import BtnLogoutGoogle from "../Buttom/BtnLogoutGoogle";
 import logoYoutube from "../../Img/YouTube_Logo.png";
 import { useEffect, useState } from "react";
 import Search from "../Page/Share";
 
-function Header() {
+function Header(props) {
+  const {handleSearch} = props;
   const [anchorEl, setAnchorEl] = useState(null);
   const [acc, setAcc] = useState();
 
@@ -37,7 +38,7 @@ function Header() {
           {acc != null || acc != undefined ? (
             <div className="d-flex">
               <div className="pe-2">
-                <Search />
+                <Search handleSearch={handleSearch} />
               </div>
               <IconButton
                 size="large"

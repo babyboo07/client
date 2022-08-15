@@ -1,6 +1,6 @@
 const { Mail } = require("@mui/icons-material");
 const mongoose = require("mongoose");
-const UserModel = require("./Backend/Model/UserModel.js");
+const UserModel = require("./src/Backend/Model/UserModel.js");
 
 mongoose.connect(
   "mongodb+srv://maipn:PDhIC1KVODATQ8B9@cluster0.xtarnvd.mongodb.net/sharedVideo?retryWrites=true&w=majority"

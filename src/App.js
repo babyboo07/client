@@ -1,13 +1,12 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navigate, Route, Routes } from "react-router-dom";
-import Login from "./Component/LoginPage/Login";
 import { StyledEngineProvider } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 import Home from "./Component/Page/Home";
 import { gapi } from "gapi-script";
-import DetailVideo from "./Component/Shared/DetailVideo";
-
+import DetailVideo from "./Component/Page/DetailVideo";
+import Login from "./Component/Page/LoginPage/Login";
 function App() {
   const [state, setState] = useState();
   const clientId = "225661972533-n8l1k438lkbnti0ubs6dm1jjetj8kkga.apps.googleusercontent.com";

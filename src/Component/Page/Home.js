@@ -1,15 +1,35 @@
-import { Fab, Grid } from "@mui/material";
+import { Fab} from "@mui/material";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import Header from "../Layout/Header";
 import { Box } from "@mui/system";
 import CardYoutube from "../Shared/Card";
+import { useEffect, useState } from "react";
+import listVideos from "../Mock/Listvideo";
 
 function Home() {
+  const [videos,setVideos] = useState(listVideos.slice(0,15));
+  const [hasMore,setHasMore] = useState(true);
+
+  const handleSearch = (searchQuery) => {
+    const res = listVideos.filter(items=>items.snippet.title.toLowerCase().includes(searchQuery.toLowerCase()))
+    setVideos(res);
+  };
+
+  const fetchMoreData = () => {
+    setVideos(videos.concat(listVideos.slice(videos.length, videos.length +15)));
+  };
+
+  useEffect(()=>{
+    if(videos.length == listVideos.length){
+      setHasMore(false);
+    }
+  },[videos])
+
   return (
     <>
-      <Header />
+      <Header handleSearch={handleSearch} />
       <div>
         <Box sx={{ "& > :not(style)": { m: 1 } }}>
           <div className="pt-2 ps-2">
@@ -31,7 +51,7 @@ function Home() {
           </div>
         </Box>
         <hr />
-        <CardYoutube />
+        <CardYoutube videos={videos} fetchMoreData={fetchMoreData}  hasMore={hasMore}/>
       </div>
     </>
   );
