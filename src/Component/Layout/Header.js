@@ -36,7 +36,7 @@ function Header() {
           </div>
           {acc != null || acc != undefined ? (
             <div className="d-flex">
-              <div clasName="pe-2">
+              <div className="pe-2">
                 <Search />
               </div>
               <IconButton

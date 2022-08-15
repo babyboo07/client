@@ -1,6 +1,4 @@
-import axios from "axios";
-
-const key = "AIzaSyAKrnJSC62IFw8jUGpkzOiOZVV6Y1cEisg";
+const key = "AIzaSyAqVDkRJ6EIT_GRiekDo7oELbS-jlFFIvY";
 
 export const searchVideo = async (videoId) => {
   const response =
@@ -9,9 +7,9 @@ export const searchVideo = async (videoId) => {
   return response.json();
 };
 
-export const videoList = async (string) => {
+export const videoList = async (offset) => {
   const res = await fetch(
-    `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=surfing&videoType=${string}&key=${key}`
+    `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=${offset}&q=surfing&videoType=any&key=${key}`
   );
   return res.json();
 };

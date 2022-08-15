@@ -6,7 +6,7 @@ import { StyledEngineProvider } from "@mui/material/styles";
 import { useEffect, useState } from "react";
 import Home from "./Component/Page/Home";
 import { gapi } from "gapi-script";
-import Share from "./Component/Page/Share";
+import DetailVideo from "./Component/Shared/DetailVideo";
 
 function App() {
   const [state, setState] = useState();
@@ -29,7 +29,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<Home state={state} setState={setState} />} />
-            <Route path="/share" element={<Share />} />
+            <Route path="/detail" element={<DetailVideo />} />
           </Routes>
       </StyledEngineProvider>
     </div>

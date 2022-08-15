@@ -31,13 +31,7 @@ function Home() {
           </div>
         </Box>
         <hr />
-        <Grid container spacing={1} className="ps-5">
-          {new Array(20).fill(null).map((_, index) => (
-            <Grid item key={index}>
-                <CardYoutube />
-            </Grid>
-          ))}
-        </Grid>
+        <CardYoutube />
       </div>
     </>
   );
