@@ -2,9 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { GoogleLogout } from "react-google-login";
 import LogoutIcon from '@mui/icons-material/Logout';
 
-function BtnLogoutGoogle() {
+function BtnLogoutGoogle(props) {
   const navigate = useNavigate();
-
   const onSuccess = () => {
     console.log("logout");
     localStorage.removeItem("googleAcc");
@@ -14,7 +13,7 @@ function BtnLogoutGoogle() {
   return (
     <div>
       <GoogleLogout
-        clientId={process.env.KEY_GOOGLE_API}
+        clientId={process.env.REACT_APP_KEY_GOOGLE_API}
         onLogoutSuccess={onSuccess}
         icon={false}
         className="bg-white border-0 text-body shadow-none fs-6"
