@@ -1,4 +1,4 @@
-import { Fab} from "@mui/material";
+import { Fab } from "@mui/material";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
@@ -6,26 +6,38 @@ import Header from "../Layout/Header";
 import { Box } from "@mui/system";
 import CardYoutube from "../Shared/Card";
 import { useEffect, useState } from "react";
-import listVideos from "../Mock/Listvideo";
+// import listVideos from"../Mock/Listvideo";
+import { getListVideos } from "../../Hook/useMongoose";
 
 function Home() {
-  const [videos,setVideos] = useState(listVideos.slice(0,15));
-  const [hasMore,setHasMore] = useState(true);
+  const [videos, setVideos] = useState([]);
+  const [listVideos, setListVideos] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
+
+  useEffect(() => {
+    fetchListVideo();
+  }, []);
 
   const handleSearch = (searchQuery) => {
-    const res = listVideos.filter(items=>items.snippet.title.toLowerCase().includes(searchQuery.toLowerCase()))
+    const res = listVideos.filter((items) =>
+      items.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    console.log(res);
     setVideos(res);
   };
 
   const fetchMoreData = () => {
-    setVideos(videos.concat(listVideos.slice(videos.length, videos.length +15)));
-  };
-
-  useEffect(()=>{
-    if(videos.length == listVideos.length){
+    if (videos.length === listVideos.length) {
       setHasMore(false);
     }
-  },[videos])
+    setVideos(videos.concat(listVideos.slice(videos.length, videos.length + 10)));
+  };
+
+  const fetchListVideo = async () => {
+    const res = await getListVideos();
+    setListVideos(res);
+    setVideos(res.slice(0, 11));
+  };
 
   return (
     <>
@@ -51,7 +63,7 @@ function Home() {
           </div>
         </Box>
         <hr />
-        <CardYoutube videos={videos} fetchMoreData={fetchMoreData}  hasMore={hasMore}/>
+        <CardYoutube videos={videos} fetchMoreData={fetchMoreData} hasMore={hasMore} />
       </div>
     </>
   );

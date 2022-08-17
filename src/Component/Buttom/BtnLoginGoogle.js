@@ -1,16 +1,13 @@
 import { GoogleLogin } from "react-google-login";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addUser } from "../../Hook/useMongoose";
 
 function BtnLoginGoogle() {
   const navigate = useNavigate();
-  const dispath = useDispatch();
+  const clientId= '225661972533-n8l1k438lkbnti0ubs6dm1jjetj8kkga.apps.googleusercontent.com';
 
-  const onSuccess = (res) => {
+  const onSuccess = async (res) => {
     if (res) {
       localStorage.setItem("googleAcc", JSON.stringify(res.profileObj));
-      // dispath(addUser(res.profileObj));
       console.log(res.profileObj);
       navigate("/")
     }
@@ -23,7 +20,7 @@ function BtnLoginGoogle() {
   return (
     <div>
       <GoogleLogin
-        clientId={process.env.REACT_APP_KEY_GOOGLE_API}
+        clientId={clientId}
         buttomText="Login Google"
         onSuccess={onSuccess}
         onFailure={onFailure}
