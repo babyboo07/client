@@ -8,6 +8,9 @@ function BtnLogoutGoogle(props) {
   const onSuccess = () => {
     console.log("logout");
     localStorage.removeItem("googleAcc");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("user");
+    localStorage.removeItem("refreshToken");
     navigate("/login");
   };
 

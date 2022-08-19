@@ -7,12 +7,17 @@ import { AccountCircle } from "@mui/icons-material";
 import BtnLogoutGoogle from "../Buttom/BtnLogoutGoogle";
 import logoYoutube from "../../Img/YouTube_Logo.png";
 import { useEffect, useState } from "react";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Search from "../Page/Share";
 
 function Header(props) {
   const {handleSearch} = props;
   const [anchorEl, setAnchorEl] = useState(null);
   const [acc, setAcc] = useState();
+
+  useEffect(() => {
+    setAcc(localStorage.getItem("googleAcc")||localStorage.getItem("accessToken"));
+  }, [acc]);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -22,9 +27,6 @@ function Header(props) {
     setAnchorEl(null);
   };
 
-  useEffect(() => {
-    setAcc(localStorage.getItem("googleAcc"));
-  }, []);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -67,6 +69,10 @@ function Header(props) {
           >
             <MenuItem className="ps-2" onClick={handleClose}>
               <AccountBoxIcon fontSize="medium" className="pe-1" /> Profile
+            </MenuItem>
+            <MenuItem className="ps-2">
+              <AddCircleOutlineIcon  fontSize="medium" className="pe-1" />
+              Share Video
             </MenuItem>
             <MenuItem className="ps-0">
               <BtnLogoutGoogle />

@@ -1,28 +1,25 @@
-import { Fab } from "@mui/material";
-import FastfoodIcon from "@mui/icons-material/Fastfood";
-import VideogameAssetIcon from "@mui/icons-material/VideogameAsset";
-import MusicNoteIcon from "@mui/icons-material/MusicNote";
+import { Chip } from "@mui/material";
 import Header from "../Layout/Header";
 import { Box } from "@mui/system";
 import CardYoutube from "../Shared/Card";
 import { useEffect, useState } from "react";
 // import listVideos from"../Mock/Listvideo";
-import { getListVideos } from "../../Hook/useMongoose";
+import { getListVideos, getlListCategory, searchByCategory, searchByName } from "../../Hook/useMongoose";
 
 function Home() {
   const [videos, setVideos] = useState([]);
   const [listVideos, setListVideos] = useState([]);
   const [hasMore, setHasMore] = useState(true);
+  const [listCate, setListCate] = useState([]);
+  const [active, setActive] = useState({ CateID: "" });
 
   useEffect(() => {
     fetchListVideo();
+    fetchListCate();
   }, []);
 
-  const handleSearch = (searchQuery) => {
-    const res = listVideos.filter((items) =>
-      items.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    console.log(res);
+  const handleSearch = async (searchQuery) => {
+    const res = await searchByName(searchQuery);
     setVideos(res);
   };
 
@@ -39,27 +36,37 @@ function Home() {
     setVideos(res.slice(0, 11));
   };
 
+  const fetchListCate = async () => {
+    const res = await getlListCategory();
+    setListCate(res);
+  };
+
+  const handleSearchCategory = async (p) => {
+    setActive({ CateID: p.CateID });
+    const res = await searchByCategory(p.CateID);
+    setVideos(res);
+  };
+
   return (
     <>
       <Header handleSearch={handleSearch} />
       <div>
         <Box sx={{ "& > :not(style)": { m: 1 } }}>
           <div className="pt-2 ps-2">
-            <Fab variant="extended" size="small" color="default">
-              All
-            </Fab>
-            <Fab className="ms-2" variant="extended" size="small" color="default">
-              <FastfoodIcon sx={{ mr: 1 }} />
-              Food
-            </Fab>
-            <Fab className="ms-2" variant="extended" size="small" color="default">
-              <VideogameAssetIcon sx={{ mr: 1 }} />
-              Game
-            </Fab>
-            <Fab className="ms-2" variant="extended" size="small" color="default">
-              <MusicNoteIcon sx={{ mr: 1 }} />
-              Music
-            </Fab>
+            {listCate.map((p) => (
+              <Chip
+                key={p.CateID}
+                variant={active.CateID === p.CateID ? "contained" : "outlined"}
+                className="ms-1 mt-2 "
+                onClick={() => handleSearchCategory(p)}
+                size="medium"
+                style={{
+                  backgroundColor: active.CateID === p.CateID ? "black" : "",
+                  color: active.CateID === p.CateID ? "#fff" : "#000",
+                }}
+                label={p.CateName}
+              />
+            ))}
           </div>
         </Box>
         <hr />

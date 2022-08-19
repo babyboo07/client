@@ -11,14 +11,16 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import BtnLoginGoogle from "../../Buttom/BtnLoginGoogle";
+import { login } from "../../../Hook/useMongoose";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {"Copyright " }
-      <Link color="inherit" href="https://mui.com/">
+      {"Copyright "}
+      <Link color="inherit" href="#">
         Share video
       </Link>
       {new Date().getFullYear()}
@@ -28,13 +30,14 @@ function Copyright(props) {
 }
 
 function Login() {
+  const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const acc = { email: data.get("email"), password: data.get("password") };
+    login(acc);
+    navigate('/');
   };
 
   return (
@@ -53,7 +56,7 @@ function Login() {
               t.palette.mode === "light" ? t.palette.grey[50] : t.palette.grey[900],
             backgroundSize: "cover",
             backgroundPosition: "center",
-            height:'100%'
+            height: "100%",
           }}
         />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -64,7 +67,7 @@ function Login() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              marginTop:"30%"
+              marginTop: "30%",
             }}
           >
             <Typography component="h1" variant="h5">
@@ -96,12 +99,18 @@ function Login() {
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
-              <Button type="submit" fullWidth className="float-end" variant="contained" sx={{ mt: 3, mb: 2 }}>
+              <Button
+                type="submit"
+                fullWidth
+                className="float-end"
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
                 Sign In
               </Button>
-              <Grid >
+              <Grid>
                 <Grid item>
-                  <BtnLoginGoogle/>
+                  <BtnLoginGoogle />
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />

@@ -4,7 +4,6 @@ import {
   CardContent,
   CardMedia,
   Grid,
-  Link,
   Typography,
 } from "@mui/material";
 import moment from "moment";
@@ -24,7 +23,6 @@ function CardYoutube(props) {
         {videos.map((p, index) => (
           <Grid item key={index}>
             <div className="ms-1">
-              <Link className="text-decoration-none" href={`/`}>
                 <Card sx={{ maxWidth: 345, maxHeight: 400 }}>
                   <CardActionArea>
                     <CardMedia
@@ -68,7 +66,6 @@ function CardYoutube(props) {
                     </CardContent>
                   </CardActionArea>
                 </Card>
-              </Link>
             </div>
           </Grid>
         ))}
