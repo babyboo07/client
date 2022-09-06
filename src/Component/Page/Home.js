@@ -1,10 +1,13 @@
-import { Chip } from "@mui/material";
 import Header from "../Layout/Header";
-import { Box } from "@mui/system";
 import CardYoutube from "../Shared/Card";
 import { useEffect, useState } from "react";
 // import listVideos from"../Mock/Listvideo";
-import { getListVideos, getlListCategory, searchByCategory, searchByName } from "../../Hook/useMongoose";
+import {
+  getListVideos,
+  getlListCategory,
+  searchByCategory,
+  searchByName,
+} from "../../Hook/useMongoose";
 
 function Home() {
   const [videos, setVideos] = useState([]);
@@ -20,6 +23,7 @@ function Home() {
 
   const handleSearch = async (searchQuery) => {
     const res = await searchByName(searchQuery);
+
     setVideos(res);
   };
 
@@ -51,24 +55,21 @@ function Home() {
     <>
       <Header handleSearch={handleSearch} />
       <div>
-        <Box sx={{ "& > :not(style)": { m: 1 } }}>
-          <div className="pt-2 ps-2">
-            {listCate.map((p) => (
-              <Chip
-                key={p.CateID}
-                variant={active.CateID === p.CateID ? "contained" : "outlined"}
-                className="ms-1 mt-2 "
-                onClick={() => handleSearchCategory(p)}
-                size="medium"
-                style={{
-                  backgroundColor: active.CateID === p.CateID ? "black" : "",
-                  color: active.CateID === p.CateID ? "#fff" : "#000",
-                }}
-                label={p.CateName}
-              />
-            ))}
-          </div>
-        </Box>
+        <div className="pt-2 px-2">
+          {listCate.map((p) => (
+            <button
+              key={p.CateID}
+              className={
+                active.CateID === p.CateID
+                  ? "bg-gray-900 text-white mt-2 mr-1 p-1 border rounded-2xl"
+                  : "bg-white text-gray-900 mt-2 ml-1 p-1 border rounded-2xl"
+              }
+              onClick={() => handleSearchCategory(p)}
+            >
+              {p.CateName}
+            </button>
+          ))}
+        </div>
         <hr />
         <CardYoutube videos={videos} fetchMoreData={fetchMoreData} hasMore={hasMore} />
       </div>

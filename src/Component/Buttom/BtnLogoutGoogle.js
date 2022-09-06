@@ -21,9 +21,8 @@ function BtnLogoutGoogle(props) {
         clientId={clientId}
         onLogoutSuccess={onSuccess}
         icon={false}
-        className="bg-white border-0 text-body shadow-none fs-6"
-      >
-        <LogoutIcon fontSize="medium"className="pe-1"/>Logout
+        className="text-gray-800 block w-full h-full text-left px-3 py-2 text-sm shadow-none"
+      >Logout
       </GoogleLogout>
     </div>
   );

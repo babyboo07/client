@@ -17,12 +17,11 @@ function CardYoutube(props) {
       dataLength={videos.length}
       next={fetchMoreData}
       hasMore={hasMore}
-      loader={<h4 style={{ textAlign: "center" }}>Loading...</h4>}
+      loader={<h4 className="text-center">Loading...</h4>}
     >
-      <Grid container spacing={1} className="ps-5">
+      <div className="mx-5 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 ">
         {videos.map((p, index) => (
-          <Grid item key={index}>
-            <div className="ms-1">
+            <div key={index} className="ml-1">
                 <Card sx={{ maxWidth: 345, maxHeight: 400 }}>
                   <CardActionArea>
                     <CardMedia
@@ -34,7 +33,7 @@ function CardYoutube(props) {
                     <CardContent>
                       <Typography
                         style={{
-                          whiteSpace: " nowrap",
+                          whiteSpace: "nowrap",
                           width: "340px",
                           overflow: "hidden",
                           textOverflow: "ellipsis",
@@ -45,31 +44,30 @@ function CardYoutube(props) {
                       >
                         {p.title}
                       </Typography>
-                      <div className="row ">
-                        <div className="col-7">
-                          <Typography className="mt-0" variant="body1">
+                      <div className="grid grid-cols-2">
+                        <div className="col-span-1">
+                          <p className="mt-0">
                             {p.channelTitle}
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
+                          </p>
+                          <p variant="body2" color="text.secondary">
                             {moment(p.publishedAt).format("MMM-DD-YYYY")}
-                          </Typography>
+                          </p>
                         </div>
-                        <div className="col-5 ">
-                          <Typography variant="body2" className="text-end">
+                        <div className="col-span-1">
+                          <p className="text-right">
                             {p.viewCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} views
-                          </Typography>
-                          <Typography variant="body2" className="text-end">
+                          </p>
+                          <p className="text-right">
                             {p.likeCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} like
-                          </Typography>
+                          </p>
                         </div>
                       </div>
                     </CardContent>
                   </CardActionArea>
                 </Card>
             </div>
-          </Grid>
         ))}
-      </Grid>
+      </div>
     </InfiniteScroll>
   );
 }

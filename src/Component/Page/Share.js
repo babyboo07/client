@@ -1,4 +1,3 @@
-import { IconButton, Input } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React, { useState } from "react";
 
@@ -15,19 +14,17 @@ const Search = (props) => {
 
   return (
     <div>
-      <form className="d-flex justify-content-center" onSubmit={onSubmit}>
-        <Input
+      <form className="flex justify-center" onSubmit={onSubmit}>
+        <input
           type="text"
-          className="text"
+          className="outline-none border p-1 rounded-xl focus:border-cyan-500"
           onChange={(e) => setSearchQuery(e.target.value)}
-          label="Enter id youtube video"
           placeholder="Search..."
-          size="small"
           value={searchQuery}
         />
-        <IconButton type="submit" aria-label="search">
-          <SearchIcon style={{ fill: "blue" }} />
-        </IconButton>
+        <button type="submit" aria-label="search" className="absolute right-20 p-1">
+          <SearchIcon className="text-sky-500" />
+        </button>
       </form>
     </div>
   );
