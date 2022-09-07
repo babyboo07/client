@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import Search from "../Page/Share";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
+import ModalVideo from "../Modal/ModalVideo";
 
 function Header(props) {
   const { handleSearch } = props;
   const [acc, setAcc] = useState();
   const [isOpen, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
 
   useEffect(() => {
     setAcc(localStorage.getItem("googleAcc") || localStorage.getItem("accessToken"));
@@ -63,6 +65,7 @@ function Header(props) {
                         className="text-gray-700 block px-4 py-2 text-sm no-underline"
                         role="menuitem"
                         tabIndex="-1"
+                        onClick={<ModalVideo handleOpen={handleOpen} />}
                         id="menu-item-1"
                       >
                         Share Video
