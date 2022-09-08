@@ -50,7 +50,6 @@ function Home() {
     const res = await searchByCategory(p.CateID);
     setVideos(res);
   };
-
   return (
     <>
       <Header handleSearch={handleSearch} />
@@ -62,7 +61,7 @@ function Home() {
               className={ 
                 active.CateID === p.CateID
                   ? "bg-gray-900 text-white mt-2 mr-1 px-2 p-1 border rounded-2xl"
-                  : "bg-white text-gray-900 mt-2 ml-1 px- p-1 border rounded-2xl"
+                  : "bg-white text-gray-900 mt-2 mr-1 px-2 p-1 border rounded-2xl"
               }
               onClick={() => handleSearchCategory(p)}
             >

@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import Home from "./Component/Page/Home";
 import { gapi } from "gapi-script";
 import Login from "./Component/Page/LoginPage/Login";
+import ModalVideo from "./Component/Modal/ModalVideo";
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home />} />
+          <Route path="/sharevideo" element={<ModalVideo />} />
         </Routes>
       </StyledEngineProvider>
     </div>

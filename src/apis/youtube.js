@@ -1,8 +1,7 @@
-export const searchVideo = async (videoId) => {
+export const searchVideoID = async (videoId) => {
   const response =
-    await fetch(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${process.env.REACT_APP_KEY_YOUTUBE_API}
-    `);
-  return response.json();
+    await fetch(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${process.env.REACT_APP_YOUTUBE_API}`);
+  return await response.json();
 };
 
 export const videoList = async (offset) => {

@@ -11,27 +11,39 @@ export const addUser = async (data) => {
 };
 
 export const getListVideos = async () => {
-  const res = await fetch(`http://localhost:5000/v1/videos`);
+  const res = await fetch(`${process.env.REACT_APP_HTTP_API}videos`);
   return res.json();
 };
 
 export const getlListCategory = async () => {
-  const res = await fetch(`http://localhost:5000/v1/category`);
+  const res = await fetch(`${process.env.REACT_APP_HTTP_API}category`);
   return res.json(res);
 };
 
 export const searchByCategory = async (CateID) => {
-  const res = await fetch(`http://localhost:5000/v1/videos/seachCategory?CateID=${CateID}`);
+  const res = await fetch(`${process.env.REACT_APP_HTTP_API}videos/seachCategory?CateID=${CateID}`);
   return res.json(res);
 };
 
 export const searchByName = async (searchQuery) => {
-  const res = await fetch(`http://localhost:5000/v1/videos/search?title=${searchQuery}`);
+  const res = await fetch(`${process.env.REACT_APP_HTTP_API}videos/search?title=${searchQuery}`);
   return res.json(res);
 };
 
+export const addVideo = async (videoResult) => {
+  const response = await fetch(`${process.env.REACT_APP_HTTP_API}videos/create-video`, {
+      method: "POST",
+      headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify({video: videoResult}),
+  });
+  return response.json();
+};
+
 export const login = async (req) => {
-  const user = await fetch(`http://localhost:5000/v1/auth/login`, {
+  const user = await fetch(`${process.env.REACT_APP_HTTP_API}v1/auth/login`, {
     method: "POST",
     headers: {
       Accept: "application/json",
